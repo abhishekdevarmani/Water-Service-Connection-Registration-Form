@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+<div class="container">
+    <h2 class="text-center">Registration Form</h2>
+</div>
+<form method="post" action="/">
+{% csrf_token %}
+<div class="container">
+    <div class="form-group text-center">
+        <label for="zroLocation">ZRO Location</label>
+        <select class="form-control" name="zroLocation" id="zroLocation" style="width: 400px; margin: 0 auto;"">
+            <option value=" Select">Select</option>
+            <option>Bangalore</option>
+            <option>Belgavi</option>
+            <option>Hubli</option>
+        </select>
+    </div>
+    <div class="container">
+        <fieldset>
+            <legend>Type Of Request (Please tick):</legend>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12 col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="ApplyFor" id="WatSewCon" onclick="toggleTemp()" value="WATERSEW" checked>
+
+                        <label class="form-check-label" for="WatSewCon">
+                            Water and Sewerage Connection 
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="ApplyFor" id="PermCon" onclick="toggleTemp()" value="PERMCONN">
+                        <label class="form-check-label" for="PermCon">
+                            Water Connection  <i><p style="font-size:11px;">(In case where no Sewerage System has been laid by DJB)</p></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="ApplyFor" id="SewCon" onclick="toggleTemp()" value="SEWCONN">
+                        <label class="form-check-label" for="SewCon">
+                            Sewerage Connection <i><p style="font-size:11px;">(In case Water Connection is not required)</p></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="ApplyFor" id="Regul" onclick="toggleTemp()" value="REGULARIZATION">
+                        <label class="form-check-label" for="Regul">
+                            Regularization <i><p style="font-size: 11px;">(In case water/sewer connection already installed without prior sanction)</p></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="container">
+            <legend>Connection Type:</legend>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="connectionType" id="connectionTypePerm" value="COMMON" checked>
+                        <label class="form-check-label" for="connectionTypePerm">
+                            Permanent Connection
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="connectionType" id="connectionTypeTemp" value="TEMP">
+                        <label class="form-check-label" for="connectionTypeTemp">
+                            Temporary Connection
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+        </fieldset>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4" style="padding: 1cm;"> <!-- Adjust the column width as needed -->
+                <input type="text" class="form-control" placeholder="First name" name="firstName" id="firstName" aria-label="First name">
+            </div>
+            <div class="col-md-4 " style="padding: 1cm;"> <!-- Adjust the column width as needed -->
+                <input type="text" class="form-control" placeholder="Middle name" name="middleName" id="middleName" aria-label="Middle Name">
+            </div>
+            <div class="col-md-4" style="padding: 1cm;"> <!-- Adjust the column width as needed -->
+                <input type="text" class="form-control" placeholder="Last name"  name="lastName" id="lastName" aria-label="Last name">
+            </div>
+        </div>
+    </div>
+    <fieldset>
+        <legend>Contact Details</legend>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12 col-md-4">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Email Id">
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="Mobile" id="Mobile"  placeholder="Mobile Number">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div id="newCon-prop-address" style="margin-bottom: 10px;">
+        <fieldset>
+            <legend>Property Address</legend>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="Addr" id="Addr" placeholder="Address">
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="Land" id="Land"
+                            placeholder="Landmark">
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="pinAdd" id="pinAdd" placeholder="Pin Code">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-3" style="padding: 10px;">
+                    <label for="locaAdd">Locality</label>
+                    <select class="form-control" name="locaAdd" id="locaAdd" >
+                        <option value="NA">Please Select</option>
+                        <option>Hebbal</option>
+                        <option>Raibag</option>
+                        <option>Chikodi</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-3" style="padding: 10px;">
+                    <label for="subLocAdd">Sub locality</label>
+                    <select class="form-control" name="subLoc" id="subLoc" title="Sublocality">
+                        <option value="NA">Please Select</option>
+                        <option>Kempapura</option>
+                        <option>Raibag Rural</option>
+                        <option>Borgoan</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-3" style="padding: 10px;">
+                    <label for="assembly">Assembly</label>
+                    <select class="form-control" name="assem" id="assem" title="Assembly">
+                        <option value="NA">Please Select</option>
+                        <option>Chiranjeevi Layout</option>
+                        <option>Vidya Nagar 2</option>
+                        <option>Subhash Nagar</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-3" style="padding: 10px;">
+                    <label for="ward">Ward</label>
+                    <select class="form-control" name="vilAdd" id="vilAdd" >
+                        <option value="NA">Please Select</option>
+                        <option>Ward One</option>
+                        <option>Ward Two</option>
+                        <option>Ward Three</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+        <div class="container">
+            <!-- Form fields -->
+            <div class="row justify-content-center">
+                <div class="col-md-4 text-center">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock body %}
